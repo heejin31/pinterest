@@ -1,0 +1,282 @@
+$large: "( max-width:1599px )"; //1600보다 작은 크기
+$large-semi: "( max-width:1199px )"; //1200보다 작은 크기
+$medium: "( max-width:899px )"; //900보다 작은 크기(태블릿크기)
+$small: "( max-width:767px )"; //768보다 작은 크기
+$mobile: "( max-width:539px )"; //540보다 작은 크기
+$gradient: linear-gradient(45deg, #00bde6, #033981);
+
+@mixin space() {
+  display: block;
+  content: "";
+}
+
+ul::after,
+section::after {
+  @include space();
+  clear: both;
+}
+
+body {
+  font: {
+    family: Arial, Helvetica, sans-serif;
+    size: 10px;
+  }
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background-image: $gradient;
+
+  h1 {
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-150%);
+    color: #fff;
+    letter-spacing: 0.03em;
+    line-height: 1; /*after 밑줄과의 사이조절을 위해 넣어줌*/
+    font: {
+      family: "Saira Condensed", sans-serif;
+      size: 7em;
+      weight: 500;
+    }
+    &::after {
+      @include space;
+      width: 220px;
+      height: 2px;
+      background: #fff;
+    }
+    &::before {
+      @include space;
+      position: absolute;
+      bottom: -30px;
+      content: " PINTEREST GALLERY";
+      font-size: 0.2em;
+      opacity: 0.6;
+      letter-spacing: 8px;
+    }
+    @media #{$large} {
+      //1600보다 작아졌을때
+      left: 20px;
+    }
+    @media #{$large-semi} {
+      transform: translateY(-50%);
+      font-size: 3.5em;
+      &::after {
+        width: 110px;
+      }
+      &::before {
+        display: none;
+      }
+    } //$large-semi end
+    @media #{$mobile} {
+      left: 50%;
+      transform: translate((-50%, -50%));
+      font-size: 3.5em;
+      &::after {
+        width: 50px;
+      }
+    }
+  }
+
+  .sns {
+    position: absolute;
+    bottom: 100px;
+    right: 8em;
+
+    li {
+      float: left;
+      margin: 0 1em;
+
+      a {
+        color: #fff;
+        font-size: 1.3em;
+
+        i {
+          font-size: 1em;
+        }
+      }
+    }
+
+    span {
+      @media #{$medium} {
+        display: none;
+      }
+    }
+
+    @media #{$large-semi} {
+      bottom: 30px;
+      right: 1em;
+    }
+    @media #{$mobile} {
+      display: none;
+    }
+  } //sns end
+
+  @media #{$large} {
+    //1600보다 작아졌을때
+    width: 350px;
+  }
+  @media #{$large-semi} {
+    //1200보다 작아졌을때
+    width: 100%;
+    height: 80px;
+    position: relative; // 옆에서 위로 올라오게
+  }
+}
+
+main {
+  margin-left: 400px;
+  padding: 20px;
+
+  @media #{$large} {
+    margin-left: 350px;
+  }
+  @media #{$large-semi} {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+nav {
+  margin-bottom: 10px;
+  .btns {
+  }
+  li {
+    float: right;
+    width: 100px;
+    height: 25px;
+    margin-left: 20px;
+
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      font: {
+        family: "Saira Condensed", sans-serif;
+        size: 1.8em;
+        weight: 500;
+      }
+      color: #999;
+      text-align: center;
+      line-height: 25px;
+      letter-spacing: 0.1em;
+
+      &:hover {
+        background: $gradient;
+        color: #fff;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      }
+    }
+
+    @media #{$mobile} {
+      width: 33.333%;
+      margin-left: 0;
+      text-align: center;
+
+      a {
+        width: 90%;
+      }
+    }
+
+    &.on a {
+      background: $gradient;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+  }
+}
+
+article {
+  width: 20%;
+  float: left;
+  padding: 15px;
+  div {
+    box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  h2 {
+    margin: 10px 0 5px;
+    color: #444;
+    font: {
+      family: "Saira Condensed", sans-serif;
+      size: 2em;
+    }
+  }
+
+  p {
+    font-size: 1.1em;
+    color: #777;
+  }
+
+  @media #{$large} {
+    width: 25%;
+  }
+
+  @media #{$medium} {
+    width: 33.333%;
+  }
+
+  @media #{$small} {
+    width: 50%;
+  }
+  @media #{$mobile} {
+    width: 100%;
+  }
+}
+
+#popup {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0 0 0 /80%);
+
+  div {
+    background: #fff;
+    padding: 50px;
+    border-radius: 5px;
+    color: #033981;
+    box-shadow: 5px 5px 15px rgb(0 0 0 /80%);
+    text-align: center;
+  }
+  img {
+    width: auto;
+    height: auto;
+    max-width: 80vw;
+    max-height: 60vh;
+  }
+
+  h2 {
+    font: {
+      family: "Saira Condensed", sans-serif;
+      size: 2em;
+    }
+    margin: 15px 0 5px;
+  }
+
+  p {
+    font-size: 1.1em;
+    color: #777;
+  }
+  &.on {
+    display: flex;
+  }
+}
